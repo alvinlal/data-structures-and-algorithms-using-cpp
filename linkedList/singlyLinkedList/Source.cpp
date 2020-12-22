@@ -90,29 +90,29 @@ public:
 	}
 	bool insert(int index, int val) {
 		if (index <0 || index>length) { return false; }
-		else if (index == 0) { unshift(val); return true; }
-		else if (index == length) { push(val); return true; }
-		else {
-			Node* newNode = new Node(val);
-			Node* prevNode = get(index - 1);
-			Node* temp = prevNode->next;
-			prevNode->next = newNode;
-			newNode->next = temp;
-			length++;
-			return true;
-		}
+		if (index == 0) { unshift(val); return true; }
+		if (index == length) { push(val); return true; }
+
+		Node* newNode = new Node(val);
+		Node* prevNode = get(index - 1);
+		Node* temp = prevNode->next;
+		prevNode->next = newNode;
+		newNode->next = temp;
+		length++;
+		return true;
+
 	}
 	Node remove(int index) {
 		if (index < 0 || index >= length) { return NULL; }
-		else if (index == length - 1) { return pop(); }
-		else if (index == 0) { return shift(); }
-		else {
-			Node* previousNode = get(index - 1);
-			Node* removed = previousNode->next;
-			previousNode->next = removed->next;
-			length--;
-			return *removed;
-		}
+		if (index == length - 1) { return pop(); }
+		if (index == 0) { return shift(); }
+
+		Node* previousNode = get(index - 1);
+		Node* removed = previousNode->next;
+		previousNode->next = removed->next;
+		length--;
+		return *removed;
+
 
 	}
 	void reverse() {
@@ -127,6 +127,19 @@ public:
 			prev = node;
 			node = next;
 		}
+	}
+	bool swap(int index1, int index2) {
+		if (index1 == index2) { return true; }
+		if (index1 < 0 || index2 < 0 || index1 >= length || index2 >= length) { return false; }
+		if (!head) { return false; }
+
+		Node* firstNode = get(index1);
+		Node* secondNode = get(index2);
+		int temp = firstNode->val;
+		firstNode->val = secondNode->val;
+		secondNode->val = temp;
+		return true;
+
 	}
 	void traverse() {
 		Node* current = head;
@@ -262,6 +275,14 @@ int main() {
 	list.traverse();
 	list.reverse();
 	std::cout << "\nThe list has been reversed";
+	std::cout << "\nThe list is now: ";
+	list.traverse();
+	list.swap(1, 2);
+	std::cout << "\nIndex 1 and 2 have been swapped";
+	std::cout << "\nThe list is now: ";
+	list.traverse();
+	list.swap(7, 7);
+	std::cout << "\nInvalid index have been swapped";
 	std::cout << "\nThe list is now: ";
 	list.traverse();
 
