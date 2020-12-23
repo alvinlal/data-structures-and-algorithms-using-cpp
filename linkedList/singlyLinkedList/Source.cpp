@@ -282,7 +282,7 @@ int main() {
 	std::cout << "\nThe list is now: ";
 	list.traverse();
 	list.swap(7, 7);
-	std::cout << "\nInvalid index have been swapped";
+	std::cout << "\nInvalid indexhave been swapped";
 	std::cout << "\nThe list is now: ";
 	list.traverse();
 
