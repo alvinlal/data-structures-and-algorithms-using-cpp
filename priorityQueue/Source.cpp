@@ -19,7 +19,7 @@ public:
 
 	void enqueue(std::string val, int priority) {
 		Node* newNode = new Node(val, priority);
-		values.push_back(newNode);
+		values.emplace_back(newNode);
 		bubbleUp();
 	}
 	void bubbleUp() {
