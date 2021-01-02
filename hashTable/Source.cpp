@@ -38,6 +38,31 @@ public:
 
 
 	}
+	std::string& operator[](const std::string& key) {
+		return get(key);
+	}
+	std::vector<std::string> keys() {
+		std::vector<std::string> keysArr;
+		for (int i = 0; i < length; i++) {
+			if (!keyMap[i].empty()) {
+				for (unsigned int j = 0; j < keyMap[i].size(); j++) {
+					keysArr.push_back(keyMap[i][j][0]);
+				}
+			}
+		}
+		return keysArr;
+	}
+	std::vector<std::string> values() {
+		std::vector<std::string> valuesArr;
+		for (int i = 0; i < length; i++) {
+			if (!keyMap[i].empty()) {
+				for (unsigned int j = 0; j < keyMap[i].size(); j++) {
+					valuesArr.push_back(keyMap[i][j][1]);
+				}
+			}
+		}
+		return valuesArr;
+	}
 	void print() {
 		for (int i = 0; i < length; i++) {
 			if (!keyMap[i].empty()) {
@@ -56,6 +81,8 @@ int main() {
 	HashTable ht1;
 	std::cout << "The hash of hello is " << ht1.hash("hello");
 	std::cout << "\nThe hash of french is " << ht1.hash("french");
+	std::cout << "\nThe hash of french is " << ht1.hash("french");
+
 	ht1.set("hello world", "goodbye!!");
 	ht1.set("dogs", "are cool");
 	ht1.set("cats", "are fine");
@@ -65,4 +92,19 @@ int main() {
 	ht1.print();
 	std::string value = ht1.get("dogs");
 	std::cout << "\nThe value of the key dogs are : " << value;
+	std::cout << "\nThe value of the key cats are : " << ht1["cats"];
+
+	std::cout << "\nThe values of the table are: ";
+	std::vector<std::string> values = ht1.values();
+	for (unsigned i = 0; i < values.size(); i++) {
+		std::cout << values[i] << " " << ",";
+	}
+	std::cout << "\nThe keys of the table are: ";
+
+	std::vector<std::string> keys = ht1.keys();
+	for (unsigned int i = 0; i < keys.size(); i++) {
+		std::cout << keys[i] << " " << ",";
+	}
 }
+
+
